@@ -2,7 +2,7 @@
 title: "Constant Innovation"
 description: ""
 date: "Jan 01 2014"
-image: "/ci-website-thumb.png"
+image: "/ci-website-thumb.jpg"
 order: 3
 ---
 

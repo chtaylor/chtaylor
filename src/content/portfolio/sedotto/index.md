@@ -2,7 +2,7 @@
 title: "Sedotto"
 description: ""
 date: "Jan 01 2013"
-image: "/sedotto.jpeg"
+image: "/sedotto.jpg"
 order: 2
 ---
 
@@ -22,11 +22,11 @@ order: 2
 <div class="flex flex-row">
   <div class="basis-2/3">
 
-![Sedotto](/sedotto.jpeg)
+![Sedotto](/sedotto.jpg)
 
-![Sedotto](/sedotto-2.jpeg)
+![Sedotto](/sedotto-2.jpg)
 
-![Sedotto](/sedotto-3.jpeg)
+![Sedotto](/sedotto-3.jpg)
 
 ![Sedotto](/sedotto-4.png)
 
