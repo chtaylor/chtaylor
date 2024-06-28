@@ -2,14 +2,14 @@
 title: "545 Blackburn Road"
 description: ""
 date: "Jan 01 2014"
-image: "/545-website-v2.png"
+image: "/545-blackburn-website-v2-thumb.png"
 order: 1
 ---
 
 <div class="flex flex-row">
   <div class="basis-2/3">
 
-![545 Blackburn Road](/545-website-v2.png)
+![545 Blackburn Road](/545-blackburn-website-v2.png)
 
   </div>
   <div class="basis-1/3 px-8">
