@@ -14,7 +14,7 @@ import "@fontsource/figtree/600.css";
 import figtree400 from "@fontsource/figtree/files/figtree-latin-400-normal.woff2";
 import figtree600 from "@fontsource/figtree/files/figtree-latin-600-normal.woff2";
 
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -68,7 +68,7 @@ const { title, description, image = "/favicon.png" } = Astro.props;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<ViewTransitions  />
+<ClientRouter  />
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
