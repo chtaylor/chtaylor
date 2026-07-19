@@ -1,0 +1,23 @@
+---
+title: "Sample Page"
+description: "Astro/Tailwind theme."
+date: "Jul 01 2026"
+image: "./astro-icon-dark.png"
+demoURL: "https://www.chrisryantaylor.com"
+repoURL: "https://github.com/chtaylor/chtaylor"
+---
+
+import IconButton from "../../../components/IconButton.astro";
+
+## {frontmatter.title}
+
+#### Astro Development
+    
+A static, minimalist, portfolio theme built with Astro &amp; Tailwind.
+
+<div class="grid grid-cols-2 gap-4">
+    <IconButton href={frontmatter.repoURL} text="Source Code" icon="simple-icons:github" />
+    <IconButton href={frontmatter.demoURL} text="Visit Website" icon="material-symbols:arrow-outward-rounded" />
+</div>
+
+![Personal Webpage](astro-icon-dark.png)

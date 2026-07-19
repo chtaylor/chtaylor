@@ -1,40 +1,153 @@
 ---
-import { getCollection } from "astro:content";
-import PageLayout from "@layouts/PageLayout.astro";
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
 import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
-import { PORTFOLIO } from "@consts";
+import Link from "@components/Link.astro";
+import { dateRange } from "@lib/utils";
+import { SITE, HOME, SOCIALS } from "@consts";
 
-const portfolio = (await getCollection("portfolio"))
+import myImage from '/src/assets/IMG_0206.JPG';
+
+const blog = (await getCollection("blog"))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
+
+/*const projects = (await getCollection("projects"))
   .filter(project => !project.data.draft)
-  .sort((a, b) => a.data.order - b.data.order);
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0,SITE.NUM_PROJECTS_ON_HOMEPAGE);
+
+const allwork = (await getCollection("work"))
+  .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf())
+  .slice(0,SITE.NUM_WORKS_ON_HOMEPAGE);
+
+const work = await Promise.all(
+  allwork.map(async (item) => {
+    const { Content } = await render(item);
+    return { ...item, Content };
+  })
+);*/
+
 ---
 
-<PageLayout title={PORTFOLIO.TITLE} description={PORTFOLIO.DESCRIPTION}>
+<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <div class="space-y-10">
-      <!-- <div class="animate font-semibold text-black dark:text-white">
-        Portfolio
-      </div> -->
+    <div class="space-y-16">
 
-      <div class="grid grid-cols-3 max-md:grid-cols-2 gap-8 items-center">
-        {
-          portfolio.map((entry) => (
-            <div class="animate">
-              <a href={`/${entry.collection}/${entry.slug}`}>
-                <div class="truncate">
-                  <div class="">
-                    <img class="rounded-lg" src={entry.data.image} />
-                  </div>
-                  <div class="p-2 text-sm text-center text-black dark:text-white">
-                    {entry.data.title}
-                  </div>
-                </div>
-              </a>
+      <section class="animate space-y-4">
+        <div class="flex flex-col-reverse sm:flex-row items-start">
+          <div class="flex flex-col pr-8">
+
+            <div class="space-y-4">
+              <h2>About</h2>
+              <h4>Chris Taylor</h4>
+              <p>Hi, I am a software developer based in Melbourne, Australia with a passion for open-source technologies and web development.</p>
+              <p>I build web applications and data visualizations, along with tools for myself such as web automation, CLI apps, starter templates, and systems to simplify my work.</p>
+              <p>In my free time, I work on personal projects, write articles, tend my digital garden, and share updates in stream.</p>
             </div>
-          ))
-        }
-      </div>
+          </div>
+          <div class="w-[80px] sm:w-[200px] relative mb-8 sm:mb-0 mr-auto">
+            <img src="https://avatars.githubusercontent.com/u/3213494?v=4"
+              width="260" height="260" class="saturate-200 ring-white">
+          </div>
+        </div>
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white">
+            Latest posts
+          </h5>
+          <Link href="/blog">
+            <div>See all posts</div>
+          </Link>
+        </div>
+        <ul class="flex flex-col gap-4">
+          {blog.map(post => (
+            <li>
+              <ArrowCard entry={post} />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white">
+            Work Experience
+          </h5>
+          <Link href="/work">
+            See all work
+          </Link>
+        </div>
+        <ul class="flex flex-col space-y-4">
+          {work.map(entry => (
+            <li>
+              <div class="text-sm opacity-75">
+                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+              </div>
+              <div class="font-semibold text-black dark:text-white">
+                {entry.data.company}
+              </div>
+              <div class="text-sm opacity-75">
+                {entry.data.role}
+              </div>
+              <article>
+                <entry.Content />
+              </article>
+            </li>
+          ))}
+        </ul>
+      </section> -->
+
+      <!-- <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white">
+            Recent projects
+          </h5>
+          <Link href="/projects">
+            See all projects
+          </Link>
+        </div>
+        <ul class="flex flex-col gap-4">
+          {projects.map(project => (
+            <li>
+              <ArrowCard entry={project} />
+            </li>
+          ))}
+        </ul>
+      </section> -->
+
+      <section class="animate space-y-4">
+        <h2>Contact</h2>
+        <h4>Send A Message</h4>
+        <p>
+          If you want to get in touch with me about something or just to say hi,
+          reach out on social media or send me an email.
+        </p>
+        <ul class="flex flex-wrap gap-2">
+          {SOCIALS.map(SOCIAL => (
+            <li class="flex gap-x-2 text-nowrap">
+              <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}>
+                {SOCIAL.NAME}
+              </Link>
+              {"/"}
+            </li>
+          ))}
+          <li class="line-clamp-1">
+            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
+              {SITE.EMAIL}
+            </Link>
+          </li>
+        </ul>
+      </section>
+      
+      <section class="animate space-y-4">
+        <Image src={myImage} alt="Mt Buller"  />
+      </section>
 
     </div>
   </Container>

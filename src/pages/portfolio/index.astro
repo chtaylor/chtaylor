@@ -1,0 +1,91 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import BackToPrev from "@components/BackToPrev.astro";
+import Link from "@components/Link.astro";
+import { PORTFOLIO, PROJECTS } from "@consts";
+
+const portfolio = (await getCollection("portfolio"))
+  .filter(portfolio => !portfolio.data.draft)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0,4);
+
+const projects = (await getCollection("projects"))
+  .filter(project => !project.data.draft);
+---
+
+<PageLayout title={PORTFOLIO.TITLE} description={PORTFOLIO.DESCRIPTION}>
+  <Container>
+
+    <div class="animate space-y-4">
+      <h2>Projects</h2>
+      <h4>Development</h4>
+      <p>A collection of projects I've built and maintained.</p>
+    </div>
+
+    <div class="animate my-10">
+      <div class="grid grid-cols-2 gap-8 items-center">
+        {
+          projects.map((entry) => (
+            <div>
+              <a href={`/${entry.collection}/${entry.id}`}>
+                <div class="text-center">
+                  <div class="">
+                    <Image alt={entry.data.title} src={entry.data.image} width={460} class="rounded-md w-96" />
+                  </div>
+                  <div class="text-sm text-center inline"> 
+                    <span class="text-black dark:text-white">{entry.data.title}</span> <span>—</span> <span>{entry.data.description}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="animate flex justify-center my-10">
+      <Link href="/projects">
+        <div>See all development projects ...</div>
+      </Link>
+    </div>
+
+    <div class="animate space-y-4">
+      <h2>Design</h2>
+      <h4>Web &amp; Design</h4>
+      <p>A collection of websites and identities I've built and maintained over the years.</p>
+    </div>
+
+    <div class="animate my-10">
+      <div class="grid grid-cols-2 gap-8 items-center">
+        {
+          portfolio.map((entry) => (
+            <div>
+              <a href={`/${entry.collection}/${entry.id}`}>
+                <div class="truncate">
+                  <div class="">
+                    <Image alt={entry.data.title} src={entry.data.image} width={460} class="rounded-md w-96" />
+                  </div>
+                  <div class="p-2 text-sm text-center text-black dark:text-white">
+                    {entry.data.title}
+                  </div>
+                </div>
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="animate flex justify-center my-10">
+      <Link href="/projects">
+        <div>See all design projects ...</div>
+      </Link>
+    </div>
+
+
+  </Container>
+</PageLayout>
