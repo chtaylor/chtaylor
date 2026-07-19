@@ -21,17 +21,18 @@
     "astro": "^7.1.1",
     "astro-icon": "^1.1.5",
     "clsx": "^2.1.1",
-    "sharp": "^0.35.3",
     "eslint": "^10.7.0",
     "eslint-plugin-astro": "^1.7.0",
+    "sharp": "^0.35.3",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.3",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.112.0"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.20",
     "@iconify-json/material-symbols": "^1.2.85",
-    "@iconify-json/simple-icons": "^1.2.90"
+    "@iconify-json/simple-icons": "^1.2.90",
+    "@tailwindcss/typography": "^0.5.20"
   },
   "allowScripts": {
     "sharp@0.34.5": true,
